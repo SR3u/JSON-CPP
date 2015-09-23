@@ -10,12 +10,12 @@
 #include "json.h"
 int main(int argc, const char * argv[])
 {
-    std::string jsonStr="{\"arr\":[1,2,3],\"key\":\"value\",\"obj\":{\"k\":\"v\"},}";
+    std::string jsonStr="{\"arr\":[1,2,3],\"key\":\"value\",\"obj\":{\"k\":\"v\"},\"bool\":true}";
     //"{\"key\":\"value\",\"obj\":{\"k\":\"v\"},\"arr\":[1,2,3]}";
     std::JSON json(jsonStr);
     std::cout <<json.toString()<<"\n";
     json.parse(json.toString());
     std::cout <<json.toString()<<"\n";
-    std::cout <<std::to_string(true)<<"\n";
+    std::cout<<"bool:"<<std::boolalpha<<json.getBool("bool");
     return 0;
 }

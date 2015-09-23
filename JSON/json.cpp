@@ -9,6 +9,7 @@
 #include "json.h"
 #include "jsmn/jsmn.h"
 #include <sstream>
+#include <algorithm>
 using namespace std;
 
 JSON::JSON(const string& jsonStr):container(){parse(jsonStr);}
@@ -83,9 +84,7 @@ string JSON::toString()const
         }
     }
     ss<<"}";
-    string res;
-    ss>>res;
-    return res;
+    return ss.str();
 }
 std::string to_string(const JSON& json)
 {
@@ -100,32 +99,32 @@ JSON JSON::getJSON(const string& key)
     JSON json(getString(key));
     return json;
 }
+bool JSON::getBool(const string& key)
+{
+    try {
+    int i=getInt(key);
+    if(i!=0){return true;}
+    }
+    catch (const std::invalid_argument&e){}
+    string str=getString(key);
+    std::transform(str.begin(), str.end(), str.begin(), ::tolower);
+    return str=="true";
+}
+int JSON::getInt(const string& key){return std::stoi(getString(key));}
+long JSON::getLong(const string& key){return std::stol(getString(key));}
+float JSON::getFloat(const string& key){return std::stof(getString(key));}
+double JSON::getDouble(const string& key){return std::stod(getString(key));}
 /*
-bool JSON::getBool(const string& key);
-int JSON::getInt(const string& key);
-long JSON::getLong(const string& key);
-float JSON::getFloat(const string& key);
-double JSON::getDouble(const string& key);
 //*/
-string JSON::getString(const size_t& idx)
-{
-    json_container::iterator it=container->begin();
-    std::advance(it, idx);
-    return it->second;
-}
-JSON JSON::getJSON(const size_t& idx)
-{
-    JSON json(getString(idx));
-    return json;
-}
-/*
-bool JSON::getBool(const size_t& idx);
-int JSON::getInt(const size_t& idx);
-long JSON::getLong(const size_t& idx);
-float JSON::getFloat(const size_t& idx);
-double JSON::getDouble(const size_t& idx);
+string JSON::getString(const size_t& idx){return getString(std::to_string(idx));}
+JSON JSON::getJSON(const size_t& idx){return getJSON(std::to_string(idx));}
+bool JSON::getBool(const size_t& idx){return getBool(std::to_string(idx));}
+int JSON::getInt(const size_t& idx){return std::stoi(getString(idx));}
+long JSON::getLong(const size_t& idx){return getLong(std::to_string(idx));}
+float JSON::getFloat(const size_t& idx){return getFloat(std::to_string(idx));}
+double JSON::getDouble(const size_t& idx){return getDouble(std::to_string(idx));}
 
-//*/
+
 void JSON::set(const string& key,const string& val)
 {
     (*container)[key]=val;
@@ -134,8 +133,13 @@ void JSON::set(const string& key,const JSON& val)
 {
     set(key,val.toString());
 }
+void JSON::set(const string& key,const bool& val)
+{
+    stringstream tmp;
+    tmp<<std::boolalpha<<val;
+    set(key,tmp.str());
+}
 /*
- void JSON::set(const string& key,const bool& val);
  void JSON::set(const string& key,const int& val);
  void JSON::set(const string& key,const long& val);
  void JSON::set(const string& key,const float& val);
@@ -149,8 +153,13 @@ void JSON::set(const size_t& idx,const JSON& val)
 {
     set(idx,val.toString());
 }
+void JSON::set(const size_t& idx,const bool& val)
+{
+    stringstream tmp;
+    tmp<<std::boolalpha<<val;
+    set(idx,tmp.str());
+}
 /*
- void JSON::set(const size_t& idx,const bool& val);
  void JSON::set(const size_t& idx,const int& val);
  void JSON::set(const size_t& idx,const long& val);
  void JSON::set(const size_t& idx,const float& val);
