@@ -61,7 +61,7 @@ void JSON::parse(const string& jsonStr)
         }
         idx++;
     }
-    
+    free(tokens);
 }
 void JSON::clear(){if(container!=NULL){delete container;container=NULL;}}
 

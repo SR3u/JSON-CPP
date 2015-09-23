@@ -5,12 +5,10 @@
 //  Created by Sergey Rump on 23.09.2015.
 //  Copyright (c) 2015 Motorola Solutions. All rights reserved.
 //
-
 #ifndef JSON_json_h
 #define JSON_json_h
 #include "string"
 #include "map"
-
 namespace std
 {
     typedef map<string,string> json_container;
