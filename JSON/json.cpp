@@ -64,7 +64,7 @@ void JSON::parse(const string& jsonStr)
 }
 void JSON::clear(){if(container!=NULL){delete container;container=NULL;}}
 
-string JSON::toString()
+string JSON::toString()const
 {
     stringstream ss;
     ss<<"{";
@@ -87,19 +87,68 @@ string JSON::toString()
     ss>>res;
     return res;
 }
+string JSON::getString(const string& key)
+{
+    return (*container)[key];
+}
+JSON JSON::getJSON(const string& key)
+{
+    JSON json(getString(key));
+    return json;
+}
 /*
-string JSON::getString(const string& key);
 bool JSON::getBool(const string& key);
 int JSON::getInt(const string& key);
 long JSON::getLong(const string& key);
 float JSON::getFloat(const string& key);
 double JSON::getDouble(const string& key);
+//*/
+string JSON::getString(const size_t& idx)
+{
+    json_container::iterator it=container->begin();
+    std::advance(it, idx);
+    return it->second;
+}
+JSON JSON::getJSON(const size_t& idx)
+{
+    JSON json(getString(idx));
+    return json;
+}
+/*
+bool JSON::getBool(const size_t& idx);
+int JSON::getInt(const size_t& idx);
+long JSON::getLong(const size_t& idx);
+float JSON::getFloat(const size_t& idx);
+double JSON::getDouble(const size_t& idx);
 
-string JSON::getString(size_t idx);
-bool JSON::getBool(size_t idx);
-int JSON::getInt(size_t idx);
-long JSON::getLong(size_t idx);
-float JSON::getFloat(size_t idx);
-double JSON::getDouble(size_t idx);
-
+//*/
+void JSON::set(const string& key,const string& val)
+{
+    (*container)[key]=val;
+}
+void JSON::set(const string& key,const JSON& val)
+{
+    set(key,val.toString());
+}
+/*
+ void JSON::set(const string& key,const bool& val);
+ void JSON::set(const string& key,const int& val);
+ void JSON::set(const string& key,const long& val);
+ void JSON::set(const string& key,const float& val);
+ void JSON::set(const string& key,const double& val);
+//*/
+void JSON::set(const size_t& idx,const string& val)
+{
+    set(to_string(idx),val);
+}
+void JSON::set(const size_t& idx,const JSON& val)
+{
+    set(idx,val.toString());
+}
+/*
+ void JSON::set(const size_t& idx,const bool& val);
+ void JSON::set(const size_t& idx,const int& val);
+ void JSON::set(const size_t& idx,const long& val);
+ void JSON::set(const size_t& idx,const float& val);
+ void JSON::set(const size_t& idx,const double& val);
 //*/

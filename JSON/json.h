@@ -28,20 +28,38 @@ namespace std
         void clear();
         
         string getString(const string& key);
+        JSON getJSON(const string& key);
         bool getBool(const string& key);
         int getInt(const string& key);
         long getLong(const string& key);
         float getFloat(const string& key);
         double getDouble(const string& key);
         
-        string getString(size_t idx);
-        bool getBool(size_t idx);
-        int getInt(size_t idx);
-        long getLong(size_t idx);
-        float getFloat(size_t idx);
-        double getDouble(size_t idx);
+        string getString(const size_t& idx);
+        JSON getJSON(const size_t& idx);
+        bool getBool(const size_t& idx);
+        int getInt(const size_t& idx);
+        long getLong(const size_t& idx);
+        float getFloat(const size_t& idx);
+        double getDouble(const size_t& idx);
         
-        string toString();
+        void set(const string& key,const string& val);
+        void set(const string& key,const JSON& val);
+        void set(const string& key,const bool& val);
+        void set(const string& key,const int& val);
+        void set(const string& key,const long& val);
+        void set(const string& key,const float& val);
+        void set(const string& key,const double& val);
+        
+        void set(const size_t& idx,const string& val);
+        void set(const size_t& idx,const JSON& val);
+        void set(const size_t& idx,const bool& val);
+        void set(const size_t& idx,const int& val);
+        void set(const size_t& idx,const long& val);
+        void set(const size_t& idx,const float& val);
+        void set(const size_t& idx,const double& val);
+        
+        string toString()const;
     };
 }
 #endif
