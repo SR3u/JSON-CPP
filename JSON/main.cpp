@@ -16,5 +16,6 @@ int main(int argc, const char * argv[])
     std::cout <<json.toString()<<"\n";
     json.parse(json.toString());
     std::cout <<json.toString()<<"\n";
+    std::cout <<std::to_string(true)<<"\n";
     return 0;
 }

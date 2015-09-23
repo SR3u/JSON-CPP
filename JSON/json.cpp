@@ -87,6 +87,10 @@ string JSON::toString()const
     ss>>res;
     return res;
 }
+std::string to_string(const JSON& json)
+{
+    return json.toString();
+}
 string JSON::getString(const string& key)
 {
     return (*container)[key];

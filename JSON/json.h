@@ -61,5 +61,6 @@ namespace std
         
         string toString()const;
     };
+    std::string to_string(const JSON& json);
 }
 #endif
