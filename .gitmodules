@@ -1,0 +1,3 @@
+[submodule "JSON/jsmn"]
+	path = JSON/jsmn
+	url = https://github.com/zserge/jsmn.git
