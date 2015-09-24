@@ -15,7 +15,7 @@ namespace std
     class JSON
     {
     private:
-        json_container *container;
+        json_container container;
         static const int baseMaxTokens=16;//basic max tokens number for jsmn
         void parseObject(int count,void *jsmn_tokens,const char*js);
         void parseArray(int count,void *jsmn_tokens,const char*js);

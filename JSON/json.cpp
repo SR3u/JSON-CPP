@@ -20,7 +20,6 @@ void JSON::parse(const string& jsonStr)
 {
     array=false;
     clear();
-    container=new json_container();
     int count=JSMN_ERROR_NOMEM;
     const char *js=jsonStr.c_str();
     int curCount=baseMaxTokens;
@@ -68,11 +67,11 @@ void JSON::parseObject(int count,void *jsmn_tokens,const char*js)
                 free(buf);
                 if(idx%2==1){
                     key=tokValue;
-                    if(idx>1){(*container)[key]=value;}
+                    if(idx>1){container[key]=value;}
                 }
                 else{
                     value=tokValue;
-                    if(idx>1){(*container)[key]=value;}
+                    if(idx>1){container[key]=value;}
                 }
                 break;
         }
@@ -98,22 +97,21 @@ void JSON::parseArray(int count,void *jsmn_tokens,const char*js)
                 sprintf(buf,"%.*s", token.end - token.start, js + token.start);
                 string tokValue(buf);
                 free(buf);
-                (*container)[to_string(idx)]=tokValue;
+                container[to_string(idx)]=tokValue;
                 break;
         }
         idx++;
     }
 }
-void JSON::clear(){if(container!=NULL){delete container;container=NULL;}}
+void JSON::clear(){container.clear();array=false;}
 
 string JSON::toString()const
 {
     stringstream ss;
     if(array){
         ss<<"[";
-        for(auto it = container->cbegin(); it != container->cend(); ++it)
+        for(auto it = container.cbegin(); it != container.cend(); ++it)
         {
-            const string &key=it->first;
             const string &value=it->second;
             switch (value[0]) {
                 case '[':
@@ -129,7 +127,7 @@ string JSON::toString()const
     }
     else{
         ss<<"{";
-        for(auto it = container->cbegin(); it != container->cend(); ++it)
+        for(auto it = container.cbegin(); it != container.cend(); ++it)
         {
             const string &key=it->first;
             const string &value=it->second;
@@ -153,7 +151,7 @@ string to_string(const JSON& json)
 }
 string JSON::getString(const string& key)
 {
-    return (*container)[key];
+    return container[key];
 }
 JSON JSON::getJSON(const string& key)
 {
@@ -187,7 +185,7 @@ double JSON::getDouble(const size_t& idx){return getDouble(to_string(idx));}
 
 void JSON::set(const string& key,const string& val)
 {
-    (*container)[key]=val;
+    container[key]=val;
 }
 void JSON::set(const string& key,const char* val)
 {
