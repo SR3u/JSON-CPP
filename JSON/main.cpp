@@ -11,7 +11,6 @@
 void test(void)
 {
     std::string jsonStr="{\"arr\":[1,2,3],\"key\":\"value\",\"obj\":{\"k\":\"v\"},\"bool\":true}";
-    //"{\"key\":\"value\",\"obj\":{\"k\":\"v\"},\"arr\":[1,2,3]}";
     std::JSON json(jsonStr);
     std::cout <<json.toString()<<"\n";
     json.parse(json.toString());
@@ -19,9 +18,6 @@ void test(void)
 }
 int main(int argc, const char * argv[])
 {
-    while (true)
-    {
-        test();
-    }
+    while (true){test();}
     return 0;
 }

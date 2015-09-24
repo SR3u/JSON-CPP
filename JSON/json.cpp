@@ -18,6 +18,7 @@ JSON::~JSON(){clear();}
 
 void JSON::parse(const string& jsonStr)
 {
+    array=false;
     clear();
     container=new json_container();
     int count=JSMN_ERROR_NOMEM;
@@ -33,6 +34,22 @@ void JSON::parse(const string& jsonStr)
         count = jsmn_parse(&p, js, strlen(js), tokens, curCount);
         if(count==JSMN_ERROR_NOMEM){curCount*=2;continue;}
     }
+    switch(tokens[0].type)
+    {
+        case JSMN_OBJECT:
+            parseObject(count, (void*)tokens, js);
+            break;
+        case JSMN_ARRAY:
+            parseArray(count, (void*)tokens, js);
+            break;
+        default: break;
+    }
+    free(tokens);
+}
+void JSON::parseObject(int count,void *jsmn_tokens,const char*js)
+{
+    array=false;
+    jsmntok_t *tokens=(jsmntok_t*)jsmn_tokens;
     string key,value;
     int idx=1;
     for (int i = 1; i<count; i++)
@@ -61,29 +78,73 @@ void JSON::parse(const string& jsonStr)
         }
         idx++;
     }
-    free(tokens);
+}
+void JSON::parseArray(int count,void *jsmn_tokens,const char*js)
+{
+    array=true;
+    jsmntok_t *tokens=(jsmntok_t*)jsmn_tokens;
+    int idx=1;
+    for (int i = 1; i<count; i++)
+    {
+        jsmntok_t token=tokens[i];
+        switch (tokens[i].type)
+        {
+            case JSMN_ARRAY:
+            case JSMN_OBJECT:
+                while(tokens[i].end<=token.end){i++;}
+                i--;
+            default:
+                char *buf=(char*)malloc(sizeof(char)*(token.size+1));
+                sprintf(buf,"%.*s", token.end - token.start, js + token.start);
+                string tokValue(buf);
+                free(buf);
+                (*container)[to_string(idx)]=tokValue;
+                break;
+        }
+        idx++;
+    }
 }
 void JSON::clear(){if(container!=NULL){delete container;container=NULL;}}
 
 string JSON::toString()const
 {
     stringstream ss;
-    ss<<"{";
-    for(auto it = container->cbegin(); it != container->cend(); ++it)
-    {
-        const string &key=it->first;
-        const string &value=it->second;
-        switch (value[0]) {
-            case '[':
-            case '{':
-                ss <<'"'<< key<<"\":" << value << ",";
-                break;
-            default:
-                ss <<'"'<< key<<"\":\"" << value << "\",";
-                break;
+    if(array){
+        ss<<"[";
+        for(auto it = container->cbegin(); it != container->cend(); ++it)
+        {
+            const string &key=it->first;
+            const string &value=it->second;
+            switch (value[0]) {
+                case '[':
+                case '{':
+                    ss <<'"'<<value << ",";
+                    break;
+                default:
+                    ss <<'"'<< value << "\",";
+                    break;
+            }
         }
+        ss<<"]";
     }
-    ss<<"}";
+    else{
+        ss<<"{";
+        for(auto it = container->cbegin(); it != container->cend(); ++it)
+        {
+            const string &key=it->first;
+            const string &value=it->second;
+            switch (value[0]) {
+                case '[':
+                case '{':
+                    ss <<'"'<< key<<"\":" << value << ",";
+                    break;
+                default:
+                    ss <<'"'<< key<<"\":\"" << value << "\",";
+                    break;
+            }
+        }
+        ss<<"}";
+    }
     return ss.str();
 }
 string to_string(const JSON& json)
