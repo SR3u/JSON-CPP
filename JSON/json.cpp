@@ -14,6 +14,12 @@ using namespace std;
 
 JSON::JSON(const string& jsonStr):container(){parse(jsonStr);}
 JSON::JSON(const char* jsonStr):container(){parse(jsonStr);}
+JSON::JSON(const JSON& json)
+{
+    clear();
+    container=new json_container(*json.container);
+    array=json.array;
+}
 JSON::~JSON(){clear();}
 
 void JSON::parse(const string& jsonStr)

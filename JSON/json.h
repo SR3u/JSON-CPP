@@ -23,6 +23,7 @@ namespace std
     public:
         JSON(const string& jsonStr);
         JSON(const char* jsonStr);
+        JSON(const JSON& json);
         ~JSON();
         
         void parse(const string& jsonStr);
