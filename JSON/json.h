@@ -45,6 +45,7 @@ namespace std
         double getDouble(const size_t& idx);
         
         void set(const string& key,const string& val);
+        void set(const string& key,const char* val);
         void set(const string& key,const JSON& val);
         void set(const string& key,const bool& val);
         void set(const string& key,const int& val);
@@ -53,6 +54,7 @@ namespace std
         void set(const string& key,const double& val);
         
         void set(const size_t& idx,const string& val);
+        void set(const size_t& idx,const char* val);
         void set(const size_t& idx,const JSON& val);
         void set(const size_t& idx,const bool& val);
         void set(const size_t& idx,const int& val);

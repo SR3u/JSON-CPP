@@ -18,6 +18,13 @@ void test(void)
 }
 int main(int argc, const char * argv[])
 {
-    while (true){test();}
+    //while (true){test();}
+    std::string jsonStr="{\"arr\":[1,2,3],\"key\":\"value\",\"obj\":{\"k\":\"v\"},\"bool\":true}";
+    std::JSON json(jsonStr);
+    std::cout <<json.toString()<<"\n";
+    std::JSON obj=json.getJSON("obj");
+    obj.set("kk", "vv");
+    json.set("obj",obj);    
+    std::cout <<json.toString()<<"\n";
     return 0;
 }

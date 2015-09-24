@@ -189,6 +189,10 @@ void JSON::set(const string& key,const string& val)
 {
     (*container)[key]=val;
 }
+void JSON::set(const string& key,const char* val)
+{
+    set(key, string(val));
+}
 void JSON::set(const string& key,const JSON& val)
 {
     set(key,val.toString());
@@ -204,14 +208,9 @@ void JSON::set(const string& key,const long& val){set(key,to_string(val));}
 void JSON::set(const string& key,const float& val){set(key,to_string(val));}
 void JSON::set(const string& key,const double& val){set(key,to_string(val));}
 
-void JSON::set(const size_t& idx,const string& val)
-{
-    set(to_string(idx),val);
-}
-void JSON::set(const size_t& idx,const JSON& val)
-{
-    set(idx,val.toString());
-}
+void JSON::set(const size_t& idx,const string& val){set(to_string(idx),val);}
+void JSON::set(const size_t& idx,const char* val){set(to_string(idx),string(val));}
+void JSON::set(const size_t& idx,const JSON& val){set(idx,val.toString());}
 void JSON::set(const size_t& idx,const bool& val)
 {
     stringstream tmp;
