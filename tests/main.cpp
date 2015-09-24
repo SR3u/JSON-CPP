@@ -16,9 +16,8 @@ void test(void)
     json.parse(json.toString());
     std::cout <<json.toString()<<"\n";
 }
-int main(int argc, const char * argv[])
+void test2(void)
 {
-    //while (true){test();}
     std::string jsonStr="{\"arr\":[1,2,3],\"key\":\"value\",\"obj\":{\"k\":\"v\"},\"bool\":true}";
     std::JSON json(jsonStr);
     std::cout <<json.toString()<<"\n";
@@ -33,5 +32,15 @@ int main(int argc, const char * argv[])
     std::cout <<arr.toString()<<"\n";
     json.set("arr", arr);
     std::cout <<json.toString()<<"\n";
+}
+int main(int argc, const char * argv[])
+{
+    //while (true){test();}
+    //test2();
+    std::string jsonStr="{\"arr\":[1,2,3],\"key\":\"value\",\"obj\":{\"k\":\"v\"},\"bool\":true}";
+    std::JSON json(jsonStr);
+    std::cout <<json.toString()<<"\n";
+    std::JSON temp(json.toString());
+    std::cout <<temp.toString()<<"\n";
     return 0;
 }

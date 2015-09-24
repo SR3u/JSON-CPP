@@ -29,9 +29,10 @@ void JSON::parse(const string& jsonStr)
     container=new json_container();
     int count=JSMN_ERROR_NOMEM;
     const char *js=jsonStr.c_str();
-    int curCount=baseMaxTokens;
     jsmntok_t *tokens=NULL;
     jsmn_parser p;
+    int curCount=0;
+    curCount = jsmn_parse(&p, js, strlen(js), NULL, 0)+1;
     while(count==JSMN_ERROR_NOMEM)
     {
         if(tokens!=NULL){free(tokens);}
