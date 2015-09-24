@@ -118,7 +118,7 @@ string JSON::toString()const
             switch (value[0]) {
                 case '[':
                 case '{':
-                    ss <<'"'<<value << ",";
+                    ss <<value << ",";
                     break;
                 default:
                     ss <<'"'<< value << "\",";

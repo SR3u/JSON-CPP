@@ -28,5 +28,10 @@ int main(int argc, const char * argv[])
     std::string tmp=json.toString();
     std::JSON temp(json.toString());
     std::cout <<temp.toString()<<"\n";
+    std::JSON arr=json.getJSON("arr");
+    arr.set(4, 44);
+    std::cout <<arr.toString()<<"\n";
+    json.set("arr", arr);
+    std::cout <<json.toString()<<"\n";
     return 0;
 }
