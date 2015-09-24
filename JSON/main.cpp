@@ -24,7 +24,9 @@ int main(int argc, const char * argv[])
     std::cout <<json.toString()<<"\n";
     std::JSON obj=json.getJSON("obj");
     obj.set("kk", "vv");
-    json.set("obj",obj);    
-    std::cout <<json.toString()<<"\n";
+    json.set("obj",obj);
+    std::string tmp=json.toString();
+    std::JSON temp(json.toString());
+    std::cout <<temp.toString()<<"\n";
     return 0;
 }
