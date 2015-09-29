@@ -7,15 +7,15 @@
 //
 #ifndef JSON_json_h
 #define JSON_json_h
-#include "string"
-#include "map"
+#include <string>
+#include <map>
 namespace std
 {
     typedef map<string,string> json_container;
     class JSON
     {
     private:
-        json_container *container;
+        json_container container;
         static const int baseMaxTokens=16;//basic max tokens number for jsmn
         void parseObject(int count,void *jsmn_tokens,const char*js);
         void parseArray(int count,void *jsmn_tokens,const char*js);
