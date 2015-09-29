@@ -33,5 +33,8 @@ int main(int argc, const char * argv[])
     std::cout <<arr.toString()<<"\n";
     json.set("arr", arr);
     std::cout <<json.toString()<<"\n";
+    std::cout<<arr.getString(0)<<"\n";
+    std::cout<<arr.getString(1)<<"\n";
+    std::cout<<arr.getString(2)<<"\n";
     return 0;
 }

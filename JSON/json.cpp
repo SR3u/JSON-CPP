@@ -89,7 +89,7 @@ void JSON::parseArray(int count,void *jsmn_tokens,const char*js)
 {
     array=true;
     jsmntok_t *tokens=(jsmntok_t*)jsmn_tokens;
-    int idx=1;
+    int idx=0;
     for (int i = 1; i<count; i++)
     {
         jsmntok_t token=tokens[i];
@@ -118,8 +118,7 @@ string JSON::toString()const
     if(array){
         ss<<"[";
         for(auto it = container->cbegin(); it != container->cend(); ++it)
-        {
-            const string &key=it->first;
+        {//const string &key=it->first;
             const string &value=it->second;
             switch (value[0]) {
                 case '[':
