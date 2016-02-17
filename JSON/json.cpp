@@ -10,6 +10,7 @@
 #include "jsmn/jsmn.h"
 #include <sstream>
 #include <algorithm>
+#include <vector>
 using namespace std;
 
 JSON::JSON(const string& jsonStr):container(){parse(jsonStr);}
@@ -28,32 +29,31 @@ void JSON::parse(const string& jsonStr)
     int count=JSMN_ERROR_NOMEM;
     const char *js=jsonStr.c_str();
     int curCount=baseMaxTokens;
-    jsmntok_t *tokens=NULL;
+    vector<jsmntok_t> tokens;
     jsmn_parser p;
     while(count==JSMN_ERROR_NOMEM)
     {
-        if(tokens!=NULL){free(tokens);}
-        tokens=(jsmntok_t*)malloc(curCount*sizeof(jsmntok_t));
+        if(tokens.size()!=0){tokens.clear();}
+        tokens.resize(curCount);
         jsmn_init(&p);
-        count = jsmn_parse(&p, js, strlen(js), tokens, curCount);
+        count = jsmn_parse(&p, js, strlen(js), tokens.data(), curCount);
         if(count==JSMN_ERROR_NOMEM){curCount*=2;continue;}
     }
     switch(tokens[0].type)
     {
         case JSMN_OBJECT:
-            parseObject(count, (void*)tokens, js);
+            parseObject(count, tokens, js);
             break;
         case JSMN_ARRAY:
-            parseArray(count, (void*)tokens, js);
+            parseArray(count, tokens, js);
             break;
         default: break;
     }
-    free(tokens);
+    tokens.clear();
 }
-void JSON::parseObject(int count,void *jsmn_tokens,const char*js)
+void JSON::parseObject(int count,vector<jsmntok_t>&tokens,const char*js)
 {
-    array=false;
-    jsmntok_t *tokens=(jsmntok_t*)jsmn_tokens;
+    array=false;    
     string key,value;
     int idx=1;
     for (int i = 1; i<count; i++)
@@ -82,10 +82,9 @@ void JSON::parseObject(int count,void *jsmn_tokens,const char*js)
         idx++;
     }
 }
-void JSON::parseArray(int count,void *jsmn_tokens,const char*js)
+void JSON::parseArray(int count,vector<jsmntok_t>&tokens,const char*js)
 {
     array=true;
-    jsmntok_t *tokens=(jsmntok_t*)jsmn_tokens;
     int idx=0;
     string jss(js);
     for (int i = 1; i<count; i++)

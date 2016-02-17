@@ -9,6 +9,8 @@
 #define JSON_json_h
 #include <string>
 #include <map>
+#include <vector>
+#include "jsmn/jsmn.h"
 namespace std
 {
     typedef map<string,string> json_container;
@@ -17,8 +19,8 @@ namespace std
     private:
         json_container container;
         static const int baseMaxTokens=16;//basic max tokens number for jsmn
-        void parseObject(int count,void *jsmn_tokens,const char*js);
-        void parseArray(int count,void *jsmn_tokens,const char*js);
+        void parseObject(int count,vector<jsmntok_t>&tokens,const char*js);
+        void parseArray(int count,vector<jsmntok_t>&tokens,const char*js);
         bool array;
     public:
         JSON(const string& jsonStr);
