@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "DA5AD1BA87DC9DF863C21D79F82686CFDF1B66A7",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "DA5AD1BA87DC9DF863C21D79F82686CFDF1B66A7" : 0,
+    "3D8B2F405978A0544554AD137A0155DFCDEB7012" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "B03E11BA-D61C-4D99-BBDD-AB5DF788DB0D",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "DA5AD1BA87DC9DF863C21D79F82686CFDF1B66A7" : "JSON-CPP\/",
+    "3D8B2F405978A0544554AD137A0155DFCDEB7012" : "JSON-CPP\/JSON\/jsmn\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "json-cpp",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "XCode\/json-cpp.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/zserge\/jsmn.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "3D8B2F405978A0544554AD137A0155DFCDEB7012"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/SR3u\/JSON-CPP.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "DA5AD1BA87DC9DF863C21D79F82686CFDF1B66A7"
+    }
+  ]
+}

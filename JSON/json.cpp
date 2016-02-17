@@ -87,6 +87,7 @@ void JSON::parseArray(int count,void *jsmn_tokens,const char*js)
     array=true;
     jsmntok_t *tokens=(jsmntok_t*)jsmn_tokens;
     int idx=0;
+    string jss(js);
     for (int i = 1; i<count; i++)
     {
         jsmntok_t token=tokens[i];
@@ -97,10 +98,7 @@ void JSON::parseArray(int count,void *jsmn_tokens,const char*js)
                 while(tokens[i].end<=token.end){i++;}
                 i--;
             default:
-                char *buf=(char*)malloc(sizeof(char)*(token.size+1));
-                sprintf(buf,"%.*s", token.end - token.start, js + token.start);
-                string tokValue(buf);
-                free(buf);
+                string tokValue=jss.substr(token.start,token.end-token.start);
                 set(idx,tokValue);
                 break;
         }
