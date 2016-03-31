@@ -7,10 +7,8 @@
 //
 
 #include "json.h"
-#include "jsmn/jsmn.h"
 #include <sstream>
 #include <algorithm>
-#include <vector>
 using namespace std;
 
 JSON::JSON(const string& jsonStr):container(){parse(jsonStr);}
@@ -223,5 +221,5 @@ void JSON::set(const size_t& idx,const float& val){set(idx,to_string(val));}
 void JSON::set(const size_t& idx,const double& val){set(idx,to_string(val));}
 
 size_t JSON::size(){return container.size();}
-static JSON JSON::createArray() {return JSON("[]");}
-static JSON JSON::createObject() {return JSON("{}");}
+JSON JSON::createArray() {return JSON("[]");}
+JSON JSON::createObject() {return JSON("{}");}
