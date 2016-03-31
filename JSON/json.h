@@ -3,14 +3,12 @@
 //  JSON
 //
 //  Created by Sergey Rump on 23.09.2015.
-//  Copyright (c) 2015 Motorola Solutions. All rights reserved.
+//  Copyright (c) 2015 SR3u. All rights reserved.
 //
 #ifndef JSON_json_h
 #define JSON_json_h
 #include <string>
 #include <map>
-#include <vector>
-#include "jsmn/jsmn.h"
 namespace std
 {
     typedef map<string,string> json_container;
@@ -19,18 +17,20 @@ namespace std
     private:
         json_container container;
         static const int baseMaxTokens=16;//basic max tokens number for jsmn
-        void parseObject(int count,vector<jsmntok_t>&tokens,const char*js);
-        void parseArray(int count,vector<jsmntok_t>&tokens,const char*js);
+        void parseObject(int count,void *jsmn_tokens,const char*js);
+        void parseArray(int count,void *jsmn_tokens,const char*js);
         bool array;
     public:
+        static JSON createArray();
+        static JSON createObject();
+        
         JSON(const string& jsonStr);
-        JSON(const char* jsonStr);
+        JSON(const char* jsonStr="{}");
         JSON(const JSON& json);
         ~JSON();
         
         void parse(const string& jsonStr);
         void clear();
-        
         string getString(const string& key);
         JSON getJSON(const string& key);
         bool getBool(const string& key);
@@ -46,6 +46,8 @@ namespace std
         long getLong(const size_t& idx);
         float getFloat(const size_t& idx);
         double getDouble(const size_t& idx);
+        
+        size_t size();
         
         void set(const string& key,const string& val);
         void set(const string& key,const char* val);
@@ -65,8 +67,29 @@ namespace std
         void set(const size_t& idx,const float& val);
         void set(const size_t& idx,const double& val);
         
+        template <typename T>
+        static JSON create(const string& key,const T& val)
+        {
+            JSON json = JSON::createObject();
+            json.set(key, val);
+            return json;
+        }
+        
+        template <typename T>
+        JSON& append(const string& key,const T& val)
+        {
+            set(key, val);
+            return *this;
+        }
+        template <typename T>
+        JSON& append(const size_t& idx,const T& val)
+        {
+            set(idx, val);
+            return *this;
+        }
         string toString()const;
     };
     std::string to_string(const JSON& json);
+    
 }
 #endif

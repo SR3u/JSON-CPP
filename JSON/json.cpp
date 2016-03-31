@@ -3,7 +3,7 @@
 //  JSON
 //
 //  Created by Sergey Rump on 23.09.2015.
-//  Copyright (c) 2015 Motorola Solutions. All rights reserved.
+//  Copyright (c) 2015 SR3u. All rights reserved.
 //
 
 #include "json.h"
@@ -18,6 +18,7 @@ JSON::JSON(const char* jsonStr):container(){parse(jsonStr);}
 JSON::JSON(const JSON& json)
 {
     clear();
+    container=json.container;
     array=json.array;
 }
 JSON::~JSON(){clear();}
@@ -220,3 +221,7 @@ void JSON::set(const size_t& idx,const int& val){set(idx,to_string(val));}
 void JSON::set(const size_t& idx,const long& val){set(idx,to_string(val));}
 void JSON::set(const size_t& idx,const float& val){set(idx,to_string(val));}
 void JSON::set(const size_t& idx,const double& val){set(idx,to_string(val));}
+
+size_t JSON::size(){return container.size();}
+static JSON JSON::createArray() {return JSON("[]");}
+static JSON JSON::createObject() {return JSON("{}");}

@@ -3,7 +3,7 @@
 //  JSON
 //
 //  Created by Sergey Rump on 23.09.2015.
-//  Copyright (c) 2015 Motorola Solutions. All rights reserved.
+//  Copyright (c) 2015 SR3u. All rights reserved.
 //
 
 #include <iostream>
