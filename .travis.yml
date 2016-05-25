@@ -1,2 +1,4 @@
 language: objective-c
-script: xcodebuild -workspace XCode/json-cpp.xcodeproj/project.xcworkspace -scheme json-cpp
+#script: xcodebuild -workspace XCode/json-cpp.xcodeproj/project.xcworkspace -scheme json-cpp
+xcode_project: 'XCode/json-cpp.xcodeproj' # path to your xcodeproj folder
+xcode_scheme: 'json-cpp'
