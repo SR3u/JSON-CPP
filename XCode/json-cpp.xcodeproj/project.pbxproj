@@ -15,6 +15,7 @@
 		41DA145A1CF5BFD900CA0797 /* jsmn.c in Sources */ = {isa = PBXBuildFile; fileRef = 4142640D1C74AFD600D376F2 /* jsmn.c */; };
 		41DA145B1CF5BFDE00CA0797 /* jsmn.h in Headers */ = {isa = PBXBuildFile; fileRef = 4142640E1C74AFD600D376F2 /* jsmn.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		41DA145C1CF5BFEC00CA0797 /* libjsonCPP.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 41DA143E1CF5BF2600CA0797 /* libjsonCPP.a */; };
+		41DA145E1CF5C0C200CA0797 /* BasicTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = 41DA145D1CF5C0C200CA0797 /* BasicTests.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,7 @@
 		41DA144F1CF5BF9800CA0797 /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		41DA14511CF5BF9800CA0797 /* Tests.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Tests.mm; sourceTree = "<group>"; };
 		41DA14531CF5BF9800CA0797 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		41DA145D1CF5C0C200CA0797 /* BasicTests.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BasicTests.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +135,7 @@
 			children = (
 				41DA14511CF5BF9800CA0797 /* Tests.mm */,
 				41DA14531CF5BF9800CA0797 /* Info.plist */,
+				41DA145D1CF5C0C200CA0797 /* BasicTests.mm */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -275,6 +278,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41DA145E1CF5C0C200CA0797 /* BasicTests.mm in Sources */,
 				41DA14521CF5BF9800CA0797 /* Tests.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
