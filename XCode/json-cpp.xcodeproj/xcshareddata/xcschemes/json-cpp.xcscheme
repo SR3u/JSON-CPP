@@ -37,6 +37,11 @@
                BlueprintName = "Tests"
                ReferencedContainer = "container:json-cpp.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "Tests">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
       <MacroExpansion>
