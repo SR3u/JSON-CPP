@@ -27,14 +27,29 @@ using namespace std;
     // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
 }
-
-- (void)testBasicParsing
+- (void) checkJsonParsing:(string)str
 {
-    std::string jsonStr="{\"arr\":[1,2,3],\"key\":\"value\",\"obj\":{\"k\":\"v\"},\"bool\":true}";
-    std::JSON json(jsonStr);
+    string jsonStr=str;
+    JSON json(jsonStr);
     XCTAssert(json.getJSON("arr").getInt(1) == 2,"json['arr'][1] != 2");
     XCTAssert(json.getJSON("obj").getString("k") == "v","json['obj']['k'] != 'v'");
     XCTAssert(json.getBool("bool"),"json['bool'] != true");
+}
+- (void)testBasicParsing
+{
+    [self checkJsonParsing:"{\"arr\":[1,2,3],\"key\":\"value\",\"obj\":{\"k\":\"v\"},\"bool\":true}"];
+}
+
+-(void)testBasicFill
+{
+    JSON json;
+    json.set("bool", true);
+    JSON obj;
+    obj.set("k", "v");
+    json.set("obj",obj);
+    json.set("key","value");
+    json.set("arr","[1,2,3]");
+    [self checkJsonParsing:json.toString()];
 }
 
 @end
